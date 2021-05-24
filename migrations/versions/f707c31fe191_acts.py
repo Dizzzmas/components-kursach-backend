@@ -1,4 +1,4 @@
-"""empty message
+"""Add Act model
 
 Revision ID: f707c31fe191
 Revises: 07546bcf6728

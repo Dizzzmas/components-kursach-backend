@@ -1,4 +1,4 @@
-"""empty message
+"""Add Person model
 
 Revision ID: 07546bcf6728
 Revises: e1e763cb595b
