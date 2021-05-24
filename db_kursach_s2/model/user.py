@@ -18,6 +18,9 @@ class User(db.Model, CoreUser, ExtID["User"]):
         SQLAEnum(UserType), nullable=False, server_default=UserType.normal.value
     )
     avatar_url = db.Column(Text())
+    created_acts = db.relationship(
+        "Act", back_populates="created_by", foreign_keys="Act.created_by_id"
+    )
     __mapper_args__: Mapping[str, Any] = {"polymorphic_on": _user_type}
 
 

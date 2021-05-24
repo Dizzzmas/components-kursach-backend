@@ -21,6 +21,8 @@ class Config:
     AURORA_CLUSTER_ARN = os.getenv("AURORA_CLUSTER_ARN")
     DATABASE_NAME = os.getenv("DATABASE_NAME")
     AURORA_DATA_API_ENABLED = os.getenv("AURORA_DATA_API_ENABLED", False)
+    API_TITLE = "Kurach"
+    API_VERSION = "1.1.0"
 
     DEV_DB_SCRIPTS_ENABLED = False  # can init-db/seed/etc be run?
 

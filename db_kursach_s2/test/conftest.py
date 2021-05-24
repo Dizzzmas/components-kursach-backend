@@ -17,7 +17,9 @@ LOCALE = "en_US"
 
 # Retrieve a database connection string from the environment
 # should be a DB that doesn't exist
-DB_CONN = os.getenv("SQLALCHEMY_DATABASE_URI", "postgresql:///db_kursach_s2_test".lower())
+DB_CONN = os.getenv(
+    "SQLALCHEMY_DATABASE_URI", "postgresql:///db_kursach_s2_test".lower()
+)
 DB_OPTS = sa.engine.url.make_url(DB_CONN).translate_connect_args()
 DB_VERSION = "11.5"
 
