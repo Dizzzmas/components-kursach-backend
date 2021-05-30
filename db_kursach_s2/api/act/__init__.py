@@ -1,10 +1,12 @@
+from sqlalchemy import or_
+
 from flask_smorest import Blueprint, abort
 from jetkit.api import CursorPage, combined_search_by, searchable_by, sortable_by
 from smorest_crud import CollectionView, ResourceView
 
 from db_kursach_s2.api.act.schema import ActSchema, UpsertActSchema
 from db_kursach_s2.db import BaseQuery
-from db_kursach_s2.model import Act, Person, BirthAct
+from db_kursach_s2.model import Act, Person, BirthAct, DeathAct, MarriageAct
 
 blp = Blueprint("Act", __name__, url_prefix="/api/acts")
 
@@ -17,11 +19,17 @@ class ActCollection(CollectionView):
     create_enabled = True
 
     @blp.response(ActSchema(many=True))
-    @blp.paginate(CursorPage)
+    @blp.paginate(CursorPage, page_size=30)
+    @combined_search_by(
+        Person.first_name,
+        Person.last_name,
+        search_parameter_name="query",
+    )
     @searchable_by(Act.type, search_parameter_name="type", exact_match=True)
     @sortable_by(Act.created_at)
     def get(self):
-        return Act.query
+        join_conditions = [Person.id == BirthAct.father_id, Person.id == BirthAct.child_id, Person.id == BirthAct.mother_id, Person.id == DeathAct.deceased_id, Person.id == MarriageAct.groom_id, Person.id == MarriageAct.bride_id]
+        return Act.query.join(Person, or_(*join_conditions))
 
     @blp.arguments(UpsertActSchema)
     @blp.response(ActSchema)

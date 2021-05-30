@@ -34,6 +34,7 @@ smorest-crud = "0.0.7"
 marshmallow-oneofschema = "^2.1.0"
 SQLAlchemy = "1.3.20"
 pyjwt = "1.6.4"
+email_normalize = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 bento-cli = "*"
