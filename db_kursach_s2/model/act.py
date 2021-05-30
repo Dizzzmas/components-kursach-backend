@@ -21,9 +21,7 @@ class Act(db.Model, ExtID):
     type = db.Column(db.Enum(ActType), nullable=False)
     issued_by = db.Column(Integer)
     issued_at = db.Column(Date)
-    created_by_id = db.Column(
-        Integer, ForeignKey("user.id", ondelete="SET NULL")
-    )
+    created_by_id = db.Column(Integer, ForeignKey("user.id", ondelete="SET NULL"))
     created_by = db.relationship(
         "User", back_populates="created_acts", foreign_keys="Act.created_by_id"
     )

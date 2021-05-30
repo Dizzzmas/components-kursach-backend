@@ -2,6 +2,9 @@
 from faker import Factory as FakerFactory
 import factory
 import random
+
+from db_kursach_s2.model import BirthAct, Person, DeathAct, MarriageAct
+from db_kursach_s2.model.act import ActType
 from db_kursach_s2.model.user import NormalUser, User
 from db_kursach_s2.db import db
 from jetkit.db import Session
@@ -27,6 +30,10 @@ def seed_db():
             f"Created default user with email {DEFAULT_NORMAL_USER_EMAIL} "
             f"with password '{DEFAULT_PASSWORD}'"
         )
+
+    db.session.add_all(BirthActFactory.create_batch(5))
+    db.session.add_all(DeathActFactory.create_batch(5))
+    db.session.add_all(MarriageActFactory.create_batch(5))
 
     db.session.commit()
     print("Database seeded.")
@@ -57,3 +64,57 @@ class NormalUserFactory(UserFactoryFactory):
         model = NormalUser
 
     email = factory.Sequence(lambda n: f"normaluser.{n}@example.com")
+
+
+class PersonFactory(SQLAFactory):
+    class Meta:
+        model = Person
+
+    first_name = factory.LazyFunction(faker.first_name)
+    last_name = factory.LazyFunction(faker.last_name)
+    address = factory.LazyFunction(faker.address)
+    date_of_birth = factory.LazyFunction(faker.past_date)
+    passport_series = factory.LazyFunction(faker.word)
+    passport_number = factory.LazyFunction(faker.word)
+
+
+class ActFactory(SQLAFactory):
+    class Meta:
+        abstract = True
+
+    issued_by = factory.LazyFunction(faker.random_int)
+    issued_at = factory.LazyFunction(faker.past_date)
+    created_by = factory.SubFactory(NormalUserFactory)
+
+
+class BirthActFactory(ActFactory):
+    class Meta:
+        model = BirthAct
+
+    father = factory.SubFactory(PersonFactory)
+    mother = factory.SubFactory(PersonFactory)
+    child = factory.SubFactory(PersonFactory)
+
+    birthplace = factory.LazyFunction(faker.address)
+    child_nationality = factory.LazyFunction(faker.word)
+
+
+class DeathActFactory(ActFactory):
+    class Meta:
+        model = DeathAct
+
+    deceased = factory.SubFactory(PersonFactory)
+    deceased_at = factory.LazyFunction(faker.past_date)
+    deceased_age = factory.LazyFunction(faker.random_int)
+    place_of_demise = factory.LazyFunction(faker.address)
+
+
+class MarriageActFactory(ActFactory):
+    class Meta:
+        model = MarriageAct
+
+    bride = factory.SubFactory(PersonFactory)
+    groom = factory.SubFactory(PersonFactory)
+    bride_last_name = factory.LazyFunction(faker.word)
+    groom_last_name = factory.LazyFunction(faker.word)
+    wed_at = factory.LazyFunction(faker.past_date)

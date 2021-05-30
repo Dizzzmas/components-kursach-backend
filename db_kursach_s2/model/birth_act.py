@@ -8,13 +8,13 @@ class BirthAct(Act):
     __mapper_args__ = {"polymorphic_identity": ActType.birth}
 
     father_id = db.Column(Integer, ForeignKey("person.id", ondelete="SET NULL"))
-    father = db.relationship("User")
+    father = db.relationship("Person", foreign_keys="BirthAct.father_id")
 
     mother_id = db.Column(Integer, ForeignKey("person.id", ondelete="SET NULL"))
-    mother = db.relationship("User")
+    mother = db.relationship("Person", foreign_keys="BirthAct.mother_id")
 
     child_id = db.Column(Integer, ForeignKey("person.id", ondelete="SET NULL"))
-    child = db.relationship("User")
+    child = db.relationship("Person", foreign_keys="BirthAct.child_id")
 
     birthplace = db.Column(Text)
     child_nationality = db.Column(Text)

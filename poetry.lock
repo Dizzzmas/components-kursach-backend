@@ -771,6 +771,22 @@ marshmallow = ">=2.0.0"
 
 [[package]]
 category = "main"
+description = "marshmallow multiplexing schema"
+name = "marshmallow-oneofschema"
+optional = false
+python-versions = ">=3.5"
+version = "2.1.0"
+
+[package.dependencies]
+marshmallow = ">=3.0.0rc6,<4.0.0"
+
+[package.extras]
+dev = ["pytest", "mock", "flake8 (3.8.4)", "flake8-bugbear (20.1.4)", "pre-commit (>=2.7,<3.0)", "tox"]
+lint = ["flake8 (3.8.4)", "flake8-bugbear (20.1.4)", "pre-commit (>=2.7,<3.0)"]
+tests = ["pytest", "mock"]
+
+[[package]]
+category = "main"
 description = "SQLAlchemy integration with the marshmallow (de)serialization library"
 name = "marshmallow-sqlalchemy"
 optional = false
@@ -1284,6 +1300,24 @@ version = "3.0.1"
 smmap = ">=3.0.1"
 
 [[package]]
+category = "main"
+description = "Reusable CRUD endpoints using flask-smorest, flask-jwt-extended, and SQLAlchemy."
+name = "smorest-crud"
+optional = false
+python-versions = ">=3.6.0"
+version = "0.0.7"
+
+[package.dependencies]
+flask = "*"
+flask-jwt-extended = "*"
+flask-smorest = "*"
+flask-sqlalchemy = "*"
+werkzeug = "*"
+
+[package.extras]
+doc = ["sphinx (!=3.0.2)", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "recommonmark"]
+
+[[package]]
 category = "dev"
 description = "This package provides 29 stemmers for 28 languages generated from Snowball algorithms."
 name = "snowballstemmer"
@@ -1501,7 +1535,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 doc = []
 
 [metadata]
-content-hash = "2837a78813650e43f25294bae362a6230519b50de6be96daa530dadd28e9f802"
+content-hash = "f3af574638d8343cdbdff2e793b19e7db2b1d0b0eb22413a7e02a566af9990ae"
 lock-version = "1.0"
 python-versions = "^3.8.0"
 
@@ -1825,6 +1859,10 @@ marshmallow = [
 marshmallow-enum = [
     {file = "marshmallow-enum-1.5.1.tar.gz", hash = "sha256:38e697e11f45a8e64b4a1e664000897c659b60aa57bfa18d44e226a9920b6e58"},
     {file = "marshmallow_enum-1.5.1-py2.py3-none-any.whl", hash = "sha256:57161ab3dbfde4f57adeb12090f39592e992b9c86d206d02f6bd03ebec60f072"},
+]
+marshmallow-oneofschema = [
+    {file = "marshmallow-oneofschema-2.1.0.tar.gz", hash = "sha256:b30cbd21928b6ced3e161186098c4ca48e470ede82c2475f7f4e1bb0edc91e68"},
+    {file = "marshmallow_oneofschema-2.1.0-py2.py3-none-any.whl", hash = "sha256:fa49dc4c7071fb70430fdff5a49f998780371879f090b47aeecb45c33b3b9ac2"},
 ]
 marshmallow-sqlalchemy = [
     {file = "marshmallow-sqlalchemy-0.25.0.tar.gz", hash = "sha256:f1491f83833ac9c8406ba603458b1447fdfd904194833aab4b3cc01ef3646944"},
@@ -2162,6 +2200,9 @@ smmap = [
 smmap2 = [
     {file = "smmap2-3.0.1-py3-none-any.whl", hash = "sha256:0cb6ea470b1ad9a65a02ca7f4c7ae601861f7dd24a43812ca51cfca2892bb524"},
     {file = "smmap2-3.0.1.tar.gz", hash = "sha256:44cc8bdaf96442dbb9a8e2e14377d074b3d0eea292eee3c95c8c449b6c92c557"},
+]
+smorest-crud = [
+    {file = "smorest-crud-0.0.7.tar.gz", hash = "sha256:e7bf42236f085e0934dd70b3c6c1a2de5179260988a8981bfbd0c548fc2412f0"},
 ]
 snowballstemmer = [
     {file = "snowballstemmer-2.1.0-py2.py3-none-any.whl", hash = "sha256:b51b447bea85f9968c13b650126a888aabd4cb4463fca868ec596826325dedc2"},
