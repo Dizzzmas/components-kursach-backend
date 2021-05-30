@@ -3,15 +3,15 @@ from jetkit.api import CursorPage, combined_search_by, searchable_by
 from smorest_crud import CollectionView
 
 from db_kursach_s2.api.act.schema import ActSchema
-from db_kursach_s2.model import Act, Person
+from db_kursach_s2.model import Act, Person, BirthAct
 
-blp = Blueprint("Act", __name__, url_prefix="act")
+blp = Blueprint("Act", __name__, url_prefix="/acts")
 
 
 @blp.route("")
 class ActCollection(CollectionView):
     model = Act
-
+    decorators = []
     list_enabled = True
     create_enabled = True
 
@@ -22,7 +22,7 @@ class ActCollection(CollectionView):
     )
     @searchable_by(Act.type, search_parameter_name="type", exact_match=True)
     def get(self):
-        return Act.query.join(Person, isouter=True)
+        return Act.query
 
     # @blp.arguments(DeveloperSchema)
     # @blp.response(DeveloperSchema)
