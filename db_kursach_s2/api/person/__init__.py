@@ -6,7 +6,7 @@ from db_kursach_s2.api.person.schema import PersonSchema
 from db_kursach_s2.db import BaseQuery
 from db_kursach_s2.model import Act, Person
 
-blp = Blueprint("Person", __name__, url_prefix="/people")
+blp = Blueprint("Person", __name__, url_prefix="/api/people")
 
 
 @blp.route("")

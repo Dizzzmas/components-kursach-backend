@@ -69,4 +69,4 @@ class UpsertActSchema(BirthActSchema, DeathActSchema, MarriageActSchema):
     created_by_id = f.Str()
 
     class Meta:
-        exclude = ('father', 'mother', 'child', 'deceased', 'bride', 'groom')
+        exclude = ("father", "mother", "child", "deceased", "bride", "groom")

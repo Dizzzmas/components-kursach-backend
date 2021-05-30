@@ -619,7 +619,7 @@ description = "Rapid web application development."
 name = "jetkit-flask"
 optional = false
 python-versions = ">=3.6.0"
-version = "8.0.0"
+version = "8.1.0"
 
 [package.dependencies]
 Flask = "*"
@@ -1012,14 +1012,13 @@ category = "main"
 description = "JSON Web Token implementation in Python"
 name = "pyjwt"
 optional = false
-python-versions = ">=3.6"
-version = "2.1.0"
+python-versions = "*"
+version = "1.6.4"
 
 [package.extras]
-crypto = ["cryptography (>=3.3.1,<4.0.0)"]
-dev = ["sphinx", "sphinx-rtd-theme", "zope.interface", "cryptography (>=3.3.1,<4.0.0)", "pytest (>=6.0.0,<7.0.0)", "coverage (5.0.4)", "mypy", "pre-commit"]
-docs = ["sphinx", "sphinx-rtd-theme", "zope.interface"]
-tests = ["pytest (>=6.0.0,<7.0.0)", "coverage (5.0.4)"]
+crypto = ["cryptography (>=1.4)"]
+flake8 = ["flake8", "flake8-import-order", "pep8-naming"]
+test = ["pytest (>3,<4)", "pytest-cov", "pytest-runner"]
 
 [[package]]
 category = "dev"
@@ -1510,7 +1509,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 doc = []
 
 [metadata]
-content-hash = "ddae8f7368bc8b4d01c028ac46dc828853d7c91abb793a0985cf259bbcea79ff"
+content-hash = "c794b3c3d9cc21ebc606c85cdca9571bc11205fd5b58f0f9b940314c1286302f"
 lock-version = "1.0"
 python-versions = "^3.8.0"
 
@@ -1712,7 +1711,7 @@ itsdangerous = [
     {file = "itsdangerous-2.0.1.tar.gz", hash = "sha256:9e724d68fc22902a1435351f84c3fb8623f303fffcc566a4cb952df8c572cff0"},
 ]
 jetkit-flask = [
-    {file = "JetKit-Flask-8.0.0.tar.gz", hash = "sha256:49cf53f7d69caf1bd5e43f3dcb163cffa7c6125e541814d7b91faddd9024d00e"},
+    {file = "JetKit-Flask-8.1.0.tar.gz", hash = "sha256:15e278b1887ce1b4dfe619155ed9216390368a1e87d277d64e390029f7e6bd18"},
 ]
 jinja2 = [
     {file = "Jinja2-3.0.1-py3-none-any.whl", hash = "sha256:1f06f2da51e7b56b8f238affdd6b4e2c61e39598a378cc49345bc1bd42a978a4"},
@@ -1920,8 +1919,8 @@ pyflakes = [
     {file = "pyflakes-2.3.1.tar.gz", hash = "sha256:f5bc8ecabc05bb9d291eb5203d6810b49040f6ff446a756326104746cc00c1db"},
 ]
 pyjwt = [
-    {file = "PyJWT-2.1.0-py3-none-any.whl", hash = "sha256:934d73fbba91b0483d3857d1aff50e96b2a892384ee2c17417ed3203f173fca1"},
-    {file = "PyJWT-2.1.0.tar.gz", hash = "sha256:fba44e7898bbca160a2b2b501f492824fc8382485d3a6f11ba5d0c1937ce6130"},
+    {file = "PyJWT-1.6.4-py2.py3-none-any.whl", hash = "sha256:30b1380ff43b55441283cc2b2676b755cca45693ae3097325dea01f3d110628c"},
+    {file = "PyJWT-1.6.4.tar.gz", hash = "sha256:4ee413b357d53fd3fb44704577afac88e72e878716116270d722723d65b42176"},
 ]
 pymmh3 = [
     {file = "pymmh3-0.0.5-py2.py3-none-any.whl", hash = "sha256:c47e9e735518501a3c9b719dbd795aa5d5a1dba48d9c85bae1777ab9ae6c7c45"},

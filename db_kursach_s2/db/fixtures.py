@@ -3,11 +3,8 @@ from faker import Factory as FakerFactory
 import factory
 import random
 
-from jetkit.model.user import AdminUser
-
 from db_kursach_s2.model import BirthAct, Person, DeathAct, MarriageAct
-from db_kursach_s2.model.act import ActType
-from db_kursach_s2.model.user import NormalUser, User
+from db_kursach_s2.model.user import NormalUser, User, AdminUser
 from db_kursach_s2.db import db
 from jetkit.db import Session
 
@@ -105,7 +102,7 @@ class BirthActFactory(ActFactory):
     child = factory.SubFactory(PersonFactory)
 
     birthplace = factory.LazyFunction(faker.address)
-    child_nationality = factory.LazyFunction(faker.word)
+    child_nationality = "Ukrainian"
 
 
 class DeathActFactory(ActFactory):

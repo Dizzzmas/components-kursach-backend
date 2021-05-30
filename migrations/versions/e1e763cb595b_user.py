@@ -43,7 +43,7 @@ def upgrade():
         sa.Column("_password", sa.Text(), nullable=True),
         sa.Column(
             "_user_type",
-            sa.Enum("normal", name="usertype"),
+            sa.Enum("normal", "admin", name="usertype"),
             server_default="normal",
             nullable=False,
         ),
