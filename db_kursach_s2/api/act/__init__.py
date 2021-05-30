@@ -1,8 +1,9 @@
-from flask_smorest import Blueprint
+from flask_smorest import Blueprint, abort
 from jetkit.api import CursorPage, combined_search_by, searchable_by
-from smorest_crud import CollectionView
+from smorest_crud import CollectionView, ResourceView
 
-from db_kursach_s2.api.act.schema import ActSchema
+from db_kursach_s2.api.act.schema import ActSchema, UpsertActSchema
+from db_kursach_s2.db import BaseQuery
 from db_kursach_s2.model import Act, Person, BirthAct
 
 blp = Blueprint("Act", __name__, url_prefix="/acts")
@@ -24,8 +25,37 @@ class ActCollection(CollectionView):
     def get(self):
         return Act.query
 
-    # @blp.arguments(DeveloperSchema)
-    # @blp.response(DeveloperSchema)
-    # def post(self, args: dict) -> Developer:
-    #     args.update(owner=get_current_user())
-    #     return super().post(args)
+    @blp.arguments(UpsertActSchema)
+    @blp.response(ActSchema)
+    def post(self, args: dict) -> Act:
+        values = {key: value for key, value in args.items() if value is not None}
+        return super().post(values)
+
+
+@blp.route("/<string:act_id>")
+class ActView(ResourceView):
+    model = Act
+    decorators = []
+    get_enabled = True
+    update_enabled = True
+    delete_enabled = True
+
+    def _lookup(self, act_id: str) -> Act:
+        act = self.model.query.filter_by(extid=act_id).one_or_none()
+        if not act:
+            abort(404)
+        return act
+
+    @blp.response(ActSchema)
+    def get(self, act_id: str) -> BaseQuery:
+        return super().get(act_id)
+
+    @blp.arguments(UpsertActSchema)
+    @blp.response(ActSchema)
+    def patch(self, args: dict, act_id: str) -> BaseQuery:
+        values = {key: value for key, value in args.items() if value is not None}
+        return super().patch(args=values, pk=act_id)
+
+    @blp.response()
+    def delete(self, act_id: str):
+        return super().delete(act_id)

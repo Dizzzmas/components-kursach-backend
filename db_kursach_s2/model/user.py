@@ -1,4 +1,4 @@
-from enum import Enum, unique
+from enum import Enum, unique, auto
 from sqlalchemy.types import Text, Enum as SQLAEnum
 from sqlalchemy import Column
 from jetkit.db.extid import ExtID
@@ -11,6 +11,7 @@ from db_kursach_s2.db import db
 @unique
 class UserType(Enum):
     normal = "normal"
+    admin = auto()
 
 
 class User(db.Model, CoreUser, ExtID["User"]):
@@ -29,3 +30,7 @@ User.add_create_uuid_extension_trigger()
 
 class NormalUser(User):
     __mapper_args__ = {"polymorphic_identity": UserType.normal}
+
+
+class AdminUser(User):
+    __mapper_args__ = {"polymorphic_identity": UserType.admin}

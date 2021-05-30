@@ -9,7 +9,7 @@ from db_kursach_s2.model.act import ActType
 
 
 class BaseActSchema(BaseSchema):
-    type = EnumField(ActType)
+    type = EnumField(ActType, required=True)
     issued_by = f.Integer()
     issued_at = f.Date()
     created_by = f.Nested(PersonSchema)
@@ -54,3 +54,19 @@ class ActSchema(OneOfSchema):
             return "marriage"
         else:
             raise Exception("Unknown object type: {}".format(obj.__class__.__name__))
+
+
+class UpsertActSchema(BirthActSchema, DeathActSchema, MarriageActSchema):
+    father_id = f.Str()
+    mother_id = f.Str()
+    child_id = f.Str()
+
+    deceased_id = f.Str()
+
+    bride_id = f.Str()
+    groom_id = f.Str()
+
+    created_by_id = f.Str()
+
+    class Meta:
+        exclude = ('father', 'mother', 'child', 'deceased', 'bride', 'groom')

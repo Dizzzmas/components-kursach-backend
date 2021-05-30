@@ -3,6 +3,8 @@ from faker import Factory as FakerFactory
 import factory
 import random
 
+from jetkit.model.user import AdminUser
+
 from db_kursach_s2.model import BirthAct, Person, DeathAct, MarriageAct
 from db_kursach_s2.model.act import ActType
 from db_kursach_s2.model.user import NormalUser, User
@@ -22,7 +24,7 @@ def seed_db():
     if not User.query.filter_by(email=DEFAULT_NORMAL_USER_EMAIL).one_or_none():
         # add default user for testing
         db.session.add(
-            NormalUserFactory.create(
+            AdminUserFactory.create(
                 email=DEFAULT_NORMAL_USER_EMAIL, password=DEFAULT_PASSWORD
             )
         )
@@ -64,6 +66,13 @@ class NormalUserFactory(UserFactoryFactory):
         model = NormalUser
 
     email = factory.Sequence(lambda n: f"normaluser.{n}@example.com")
+
+
+class AdminUserFactory(UserFactoryFactory):
+    class Meta:
+        model = AdminUser
+
+    email = factory.Sequence(lambda n: f"admin.{n}@example.com")
 
 
 class PersonFactory(SQLAFactory):
